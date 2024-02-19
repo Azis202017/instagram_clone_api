@@ -42,4 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function post() {
+        return $this->hasMany(PostInstagram::class, 'id_user');
+    }
+    public function story() {
+        return $this->hasMany(Story::class, 'id_user');
+    }
 }
