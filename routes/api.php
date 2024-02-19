@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\PostInstagramController;
+use App\Http\Controllers\StoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [UserController::class,'index']);
+
+    Route::post('/user/post/create', [PostInstagramController::class,'create']);
+    Route::post('/user/story/create', [StoryController::class,'create']);
+
+
+
+
 });
+Route::get('/user/post/', [PostInstagramController::class,'index']);
+Route::get('/user/story/', [StoryController::class,'index']);
+
+Route::post('/register', [UserController::class,'register']);
+Route::post('/login', [UserController::class,'login']);
